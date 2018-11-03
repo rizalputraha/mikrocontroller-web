@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMerk extends Migration
+class CreateTableMonitor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateTableMerk extends Migration
      */
     public function up()
     {
-        Schema::create('merk', function (Blueprint $table) {
+        Schema::create('tbl_monitor', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_merk');
+            $table->integer('tinggi');
+            $table->integer('kecepatan');
+            $table->integer('kekeruhan');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateTableMerk extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('merk');
+        Schema::dropIfExists('tbl_monitor');
     }
 }

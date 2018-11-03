@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class Monitor extends Model
 {
-    protected $table = 'barang';
+    protected $table = 'tbl_monitor';
     
     protected $fillable = [
-        'stok',
-        'id_kategori',
-        'id_merk',
+        'tinggi',
+        'kecepatan',
+        'kekeruhan',
     ];
 
     public function category(){

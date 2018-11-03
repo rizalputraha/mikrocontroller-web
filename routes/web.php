@@ -13,10 +13,6 @@
 Route::get('/','Auth\LoginController@showloginform',['middleware ' => 'guest']);
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
-    Route::resource('/barang', 'BarangController');
-    Route::resource('/category', 'CategoryController');
-    Route::resource('/merk', 'MerkController');
-    Route::resource('/transaksi', 'TransactionController');
     Route::get('/barang-masuk', 'DetailTransaksiController@masuk')->name('barang-masuk');
     Route::get('/create-masuk','DetailTransaksiController@create')->name('create-masuk');
     Route::post('/proses-masuk','DetailTransaksiController@prosesMasuk')->name('proses-masuk');

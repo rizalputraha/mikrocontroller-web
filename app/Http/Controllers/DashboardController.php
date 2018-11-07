@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $mon = Monitor::orderBy('created_at','desc')->get();
-        return view('admin.dashboard.index',compact('mon'));
+        $mon = Monitor::orderBy('created_at','desc')->first();
+        return view('admin.dashboard.index',compact('mon'));  
     }
 }

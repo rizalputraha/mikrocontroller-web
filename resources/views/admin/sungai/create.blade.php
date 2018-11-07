@@ -29,40 +29,20 @@
                                     </ul>
                                 </div>
                             @endif
-                                <form action="{{ route('barang.store') }}" method="POST">
+                                <form action="{{ url('monitor/store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
-                                    <label for="input-nm-barang">Stok</label>
-                                    <input id="input-stok" class="form-control" name="stok" type="text" placeholder="Stok Barang"/>
+                                    <label for="input-nm-barang">Ketinggian</label>
+                                    <input id="input-stok" class="form-control" name="tinggi" type="text" placeholder="cm"/>
                                 </div>
                                 <div class="form-group">
-                                <label for="input-kat-barang">Merk Barang</label>
-                                <select name="id_merk" id="input-kat-barang" class="form-control">
-                                    @if(!empty($merk))
-                                    
-                                    @foreach($merk as $m)
-                                    <option value="{{$m->id}}">{{$m->nama_merk}}</option>
-                                    @endforeach
-                                    
-                                    @else
-                                    <option disabled value="0">Data Tidak Ditemukan</option>
-                                    @endif
-                                </select>
+                                    <label for="input-kat-barang">Kecepatan</label>
+                                    <input id="input-stok" class="form-control" name="kecepatan" type="text" placeholder="L/s"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input-kat-barang">Kategori Barang</label>
-                                    <select name="id_kategori" id="input-kat-barang" class="form-control">
-                                    @if(!empty($merk))
-                                    
-                                    @foreach($category as $kat)
-                                    <option value="{{$kat->id}}">{{$kat->name}}</option>
-                                    @endforeach
-                                    
-                                    @else
-                                    <option disabled value="0">Data Tidak Ditemukan</option>
-                                    @endif
-                                    </select>
+                                    <label for="input-kat-barang">Kekeruhan</label>
+                                    <input id="input-stok" class="form-control" name="kekeruhan" type="text" placeholder="NTU"/>
                                 </div>
                                 <div class="form-group">
                                     <input class="btn btn-primary" value="Tambah" type="submit">

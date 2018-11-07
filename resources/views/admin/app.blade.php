@@ -70,62 +70,25 @@
           </a>
         </li>
 
-        <li class="menu-category">Barang</li>
-
-        <li class="menu-item @if(Request::is('admin/merk') || Request::is('admin/category')) 
-                                    {{'active open'}}
-                                 @else
-                                    {{''}}
-                                 @endif">
-          <a class="menu-link" href="#">
-            <span class="icon fa fa-cube"></span>
-            <span class="title">Barang</span>
-            <span class="arrow"></span>
+        <li class="menu-item {{ (Request::is('admin/monitor/detail')) ? 'active' : ''}}">
+          <a class="menu-link" href="{{ url('admin/monitor/detail')}}">
+            <span class="icon fa ti-search"></span>
+            <span class="title">Detail Status</span>
           </a>
-          <ul class="menu-submenu">
-            <li class="menu-item {{ (Request::is('admin/barang')) ? 'active' : ''}}">
-              <a class="menu-link" href="{{url('admin/barang')}}">
-                <span class="dot"></span>
-                <span class="title">Data Semua Barang</span>
-              </a>
-              <ul class="child-menu">
-                <li>
-                  <a href="{{url('admin/barang-masuk')}}">Barang Masuk</a>
-                </li>
-                <li>
-                  <a href="{{url('admin/barang-keluar')}}">Barang Keluar</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item {{ (Request::is('admin/merk')) ? 'active' : ''}}">
-              <a class="menu-link" href="{{url('admin/merk')}}">
-                <span class="dot"></span>
-                <span class="title">Data merk</span>
-              </a>
-            </li>
-            <li class="menu-item {{ (Request::is('admin/category')) ? 'active' : ''}}">
-              <a class="menu-link" href="{{url('admin/category')}}">
-                <span class="dot"></span>
-                <span class="title">Data Kategori Barang</span>
-              </a>
-            </li>
-          </ul>
         </li>
 
-        <li class="menu-item">
-          <a class="menu-link" href="#">
-            <span class="icon fa fa-print"></span>
-            <span class="title">Laporan</span>
-            <span class="arrow"></span>
+        <li class="menu-item {{ (Request::is('admin/monitor/grafik/detail')) ? 'active' : ''}}">
+          <a class="menu-link" href="{{ url('admin/monitor/grafik/detail')}}">
+            <span class="icon fa ti-bar-chart"></span>
+            <span class="title">Grafik Status</span>
           </a>
-          <ul class="menu-submenu">
-            <li class="menu-item {{ (Request::is('admin/laporan/barang')) ? 'active' : ''}}">
-              <a class="menu-link" href="{{url('admin/laporan/barang')}}">
-                <span class="dot"></span>
-                <span class="title">Barang</span>
-              </a>
-            </li>
-          </ul>
+        </li>
+
+        <li class="menu-item {{ (Request::is('admin/monitor/create')) ? 'active' : ''}}">
+          <a class="menu-link" href="{{ url('admin/monitor/create') }}">
+            <span class="icon fa fa-thermometer-empty"></span>
+            <span class="title">Input Kondisi Sungai</span>
+          </a>
         </li>
 
       </ul>
@@ -194,7 +157,46 @@
   <script src="{{ asset('admin/js/core.min.js')}}"></script>
   <script src="{{ asset('admin/js/app.min.js')}}"></script>
   <script src="{{ asset('admin/js/script.min.js')}}"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+  <script>
+    var url = "{{url('admin/monitor/grafik')}}";
+    var Years = new Array();
+    var Tinggi = new Array();
+    var Kecepatan = new Array();
+    var Kekeruhan = new Array();
+    
+    $(document).ready(function(){
+      $.get(url, function(response){
+        response.forEach(function(data){
+            Tinggi.push(data.tinggi);
+            Kecepatan.push(data.kecepatan);
+            Kekeruhan.push(data.kekeruhan);
+            Years.push(data.created_at);
+        });
+        var ctx = document.getElementById("canvas").getContext('2d');
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels:Years,
+                  datasets: [{
+                      label: 'Tinggi',
+                      data: Tinggi,
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+                  }
+              }
+          });
+      });
+    });
+  </script>
 </body>
 
 </html>

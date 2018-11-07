@@ -16,7 +16,7 @@ class MonitorTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('id_ID');
 
-        foreach (range(1,100) as $loop){
+        foreach (range(1,10) as $loop){
             DB::table('tbl_monitor')->insert([
                 'tinggi' => random_int(1,20),
                 'kecepatan' => random_int(1,30),

@@ -13,17 +13,18 @@
 Route::get('/','Auth\LoginController@showloginform',['middleware ' => 'guest']);
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
-    Route::get('/barang-masuk', 'DetailTransaksiController@masuk')->name('barang-masuk');
-    Route::get('/create-masuk','DetailTransaksiController@create')->name('create-masuk');
-    Route::post('/proses-masuk','DetailTransaksiController@prosesMasuk')->name('proses-masuk');
-    Route::get('/barang-keluar', 'DetailTransaksiController@keluar')->name('barang-keluar');
-    Route::get('/create-keluar', 'DetailTransaksiController@createKeluar')->name('create-keluar');
-    Route::post('/proses-keluar', 'DetailTransaksiController@prosesKeluar')->name('proses-keluar');
     Route::get('/dashboard','DashboardController@index');
-    Route::get('/laporan/barang','LaporanController@barang');
-    Route::get('/laporan/transaksi','LaporanController@transaksi');
-    Route::get('/laporan/barang-masuk','LaporanController@masuk');
-    Route::get('/laporan/barang-keluar','LaporanController@keluar');
+    // tampilan dan proses create data
+    Route::get('/monitor/create','SungaiController@create');
+    Route::post('/monitor/store','SungaiController@store');
+    //tabel monitoring sungai
+    Route::get('/monitor/detail','SungaiController@index');
+    //route untuk menampilkan semua grafik
+    Route::get('/monitor/grafik/detail','SungaiController@chart');
+
+    //data-json untuk grafik
+    Route::get('/monitor/grafik','SungaiController@chart');
+    Route::get('/monitor/grafik-all','SungaiController@chartmore');
 });
 
 

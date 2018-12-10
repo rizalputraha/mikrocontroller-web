@@ -37,26 +37,49 @@
                             <i class="ti-pulse fs-50 "></i>
                           </div>
                           <div class="col-sm-5">
-                            @if($mon->tinggi < 10)
+                            @if($mon->tinggi < 14)
                             <span class="align-center fs-30">Status: Aman</span>
-                            @elseif($mon->tinggi > 10)
+                            @elseif($mon->tinggi > 14)
                             <span class="align-center fs-30">Status: Waspada</span>
-                            @elseif($mon->tinggi > 15)
+                            @elseif($mon->tinggi > 20)
                             <span class="align-center fs-30">Status: Bahaya</span>
+                            @else
+                            <span class="align-center fs-30">Status: Tidak Diketahui</span>
                             @endif
                           </div>  
                         </div>
                       </div>
                   </div>
 
-                  <div class="col-lg-12">
+                  
+                  <div class="col-6 col-lg-6">
+                      <div class="card card-body bg-info" >
+                        <div class="row">
+                          <div class="col-sm-2">
+                            <i class="ti-signal fs-50 "></i>
+                          </div>
+                          <div class="col-sm-5">
+                            <span class="align-center fs-30">Kemungkinan Banjir: <br>
+                              @if(strlen((30- $mon->tinggi)/($mon->kecepatan/5)) < 10)
+                                {{(30- $mon->tinggi)/($mon->kecepatan/5)}} menit
+                              @else
+                                {{substr((30- $mon->tinggi)/($mon->kecepatan/5),0,-10)}} menit
+                              @endif
+                            </span>
+                            
+                          </div>  
+                        </div>
+                      </div>
+                  </div>
+
+                  <!-- <div class="col-lg-12">
                       <div class="card " >
                         <h4 class="card-title">Grafik Monitor</h4>  
                         <div class="card-body">
                           <canvas id="canvas"></canvas>
                         </div>
                       </div>
-                  </div>
+                  </div> -->
 
                 </div>
             </div><!-- row -->

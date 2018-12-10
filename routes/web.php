@@ -20,11 +20,16 @@ Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
     //tabel monitoring sungai
     Route::get('/monitor/detail','SungaiController@index');
     //route untuk menampilkan semua grafik
-    Route::get('/monitor/grafik/detail','SungaiController@chart');
+    Route::get('/monitor/grafik/detail','GrafikController@index');
+    // route create User
+    Route::get('/user','UserController@index');
+    Route::get('/user/create','UserController@create');
+    Route::post('/user/store','UserController@store');
 
     //data-json untuk grafik
-    Route::get('/monitor/grafik','SungaiController@chart');
-    Route::get('/monitor/grafik-all','SungaiController@chartmore');
+    Route::get('/monitor/grafik/tinggi','GrafikController@chartting');
+    Route::get('/monitor/grafik/kecepatan','GrafikController@chartkec');
+    Route::get('/monitor/grafik/kekeruhan','GrafikController@chartker');
 });
 
 

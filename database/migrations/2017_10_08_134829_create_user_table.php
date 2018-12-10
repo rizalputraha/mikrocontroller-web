@@ -17,7 +17,7 @@ class CreateUserTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('username');
-            $table->string('email',72)->unique();
+            $table->string('telp');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -27,7 +27,7 @@ class CreateUserTable extends Migration
             array(
                 'name' => 'Administrator',
                 'username' => 'admin',
-                'email' => 'admin@admin.com',
+                'telp' => '000000',
                 'password' => Hash::make('admin')
             )
         );

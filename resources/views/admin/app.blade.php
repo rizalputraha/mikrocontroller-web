@@ -84,10 +84,17 @@
           </a>
         </li>
 
-        <li class="menu-item {{ (Request::is('admin/monitor/create')) ? 'active' : ''}}">
+        <!-- <li class="menu-item {{ (Request::is('admin/monitor/create')) ? 'active' : ''}}">
           <a class="menu-link" href="{{ url('admin/monitor/create') }}">
             <span class="icon fa fa-thermometer-empty"></span>
             <span class="title">Input Kondisi Sungai</span>
+          </a>
+        </li> -->
+
+        <li class="menu-item {{ (Request::is('admin/user')) ? 'active' : ''}}">
+          <a class="menu-link" href="{{ url('admin/user') }}">
+            <span class="icon fa fa-user"></span>
+            <span class="title">Tambah User</span>
           </a>
         </li>
 
@@ -159,7 +166,9 @@
   <script src="{{ asset('admin/js/script.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
   <script>
-    var url = "{{url('admin/monitor/grafik')}}";
+    var url = "{{url('admin/monitor/grafik/tinggi')}}";
+    var urlkec = "{{url('admin/monitor/grafik/kecepatan')}}";
+    var urlker = "{{url('admin/monitor/grafik/kekeruhan')}}";
     var Years = new Array();
     var Tinggi = new Array();
     var Kecepatan = new Array();
@@ -181,6 +190,70 @@
                   datasets: [{
                       label: 'Tinggi',
                       data: Tinggi,
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+                  }
+              }
+          });
+      });
+    });
+
+    $(document).ready(function(){
+      $.get(urlkec, function(response){
+        response.forEach(function(data){
+            Tinggi.push(data.tinggi);
+            Kecepatan.push(data.kecepatan);
+            Kekeruhan.push(data.kekeruhan);
+            Years.push(data.created_at);
+        });
+        var ctx = document.getElementById("kecepatan").getContext('2d');
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels:Years,
+                  datasets: [{
+                      label: 'Kecepatan',
+                      data: Kecepatan,
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero:true
+                          }
+                      }]
+                  }
+              }
+          });
+      });
+    });
+
+    $(document).ready(function(){
+      $.get(urlker, function(response){
+        response.forEach(function(data){
+            Tinggi.push(data.tinggi);
+            Kecepatan.push(data.kecepatan);
+            Kekeruhan.push(data.kekeruhan);
+            Years.push(data.created_at);
+        });
+        var ctx = document.getElementById("kekeruhan").getContext('2d');
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels:Years,
+                  datasets: [{
+                      label: 'Kekeruhan',
+                      data: Kekeruhan,
                       borderWidth: 1
                   }]
               },

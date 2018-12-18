@@ -39,7 +39,7 @@
                           <div class="col-sm-5">
                             @if($mon->tinggi < 14)
                             <span class="align-center fs-30">Status: Aman</span>
-                            @elseif($mon->tinggi > 14)
+                            @elseif($mon->tinggi > 14 && $mon->tinggi <= 20)
                             <span class="align-center fs-30">Status: Waspada</span>
                             @elseif($mon->tinggi > 20)
                             <span class="align-center fs-30">Status: Bahaya</span>
